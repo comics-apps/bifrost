@@ -14,7 +14,7 @@ describe Bifrost::Config::FromEnvUrl do
           username: "dbuser",
           password: "dbpass",
           host: "localhost",
-          port: "1234",
+          port: 1234,
           database: "dbname"
         }
       end
@@ -33,7 +33,7 @@ describe Bifrost::Config::FromEnvUrl do
           username: "dbuser",
           password: "dbpass",
           host: "localhost",
-          port: "1234",
+          port: 1234,
           database: "dbname"
         }
       end
@@ -52,7 +52,7 @@ describe Bifrost::Config::FromEnvUrl do
           username: nil,
           password: nil,
           host: "localhost",
-          port: "1234",
+          port: 1234,
           database: "dbname"
         }
       end

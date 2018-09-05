@@ -9,7 +9,7 @@ module Bifrost
           username: parts[2],
           password: parts[3],
           host: parts[4],
-          port: parts[5],
+          port: parts[5].to_i,
           database: parts[6]
         }
       end
