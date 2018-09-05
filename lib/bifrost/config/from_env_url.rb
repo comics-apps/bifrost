@@ -1,7 +1,7 @@
 module Bifrost
   module Config
     module FromEnvUrl
-      def from_env_url(url)
+      def self.call(url)
         parts = url.scan(/^(.+):\/\/((.+)\:(.+)\@){0,1}(.+)\:(.+)\/(.+)$/)[0]
 
         {

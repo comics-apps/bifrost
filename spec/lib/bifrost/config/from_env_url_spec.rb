@@ -1,10 +1,4 @@
 describe Bifrost::Config::FromEnvUrl do
-  let(:klass) do
-    Class.new { include Bifrost::Config::FromEnvUrl }
-  end
-
-  subject { klass.new }
-
   describe ".from_env_url" do
     context "with postgresql heroku addon" do
       let(:database_url) { "postgres://dbuser:dbpass@localhost:1234/dbname" }
@@ -20,7 +14,7 @@ describe Bifrost::Config::FromEnvUrl do
       end
 
       it "parse DATABASE_URL with postgres" do
-        result = subject.from_env_url(database_url)
+        result = Bifrost::Config::FromEnvUrl.call(database_url)
         expect(result).to eq(expected_result)
       end
     end
@@ -39,7 +33,7 @@ describe Bifrost::Config::FromEnvUrl do
       end
 
       it "parse DATABASE_URL with postgres" do
-        result = subject.from_env_url(database_url)
+        result = Bifrost::Config::FromEnvUrl.call(database_url)
         expect(result).to eq(expected_result)
       end
     end
@@ -58,7 +52,7 @@ describe Bifrost::Config::FromEnvUrl do
       end
 
       it "parse DATABASE_URL with postgres" do
-        result = subject.from_env_url(database_url)
+        result = Bifrost::Config::FromEnvUrl.call(database_url)
         expect(result).to eq(expected_result)
       end
     end
