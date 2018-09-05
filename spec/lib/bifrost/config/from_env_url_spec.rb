@@ -1,5 +1,5 @@
 describe Bifrost::Config::FromEnvUrl do
-  describe ".from_env_url" do
+  describe ".call" do
     context "with postgresql heroku addon" do
       let(:database_url) { "postgres://dbuser:dbpass@localhost:1234/dbname" }
       let(:expected_result) do

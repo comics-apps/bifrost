@@ -1,5 +1,5 @@
 describe Bifrost::Config::FromYamlFile do
-  describe ".from_yaml_file" do
+  describe ".call" do
     context "with postgresql heroku addon" do
       let(:path) { File.join(__dir__, "../../../fixtures/config.yml") }
 
