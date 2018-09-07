@@ -1,5 +1,6 @@
-require_relative "bifrost/config"
-require_relative "bifrost/connect"
+require "bifrost/config"
+require "bifrost/connect"
+require "bifrost/version"
 
 module Bifrost
   def self.config(path: nil, uri: nil, prefix: nil)

@@ -1,2 +1,2 @@
-require_relative "connect/mongo"
-require_relative "connect/postgres"
+require "bifrost/connect/mongo"
+require "bifrost/connect/postgres"

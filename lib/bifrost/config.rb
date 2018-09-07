@@ -1,3 +1,3 @@
-require_relative "config/from_env_url"
-require_relative "config/from_env"
-require_relative "config/from_yaml_file"
+require "bifrost/config/from_env_url"
+require "bifrost/config/from_env"
+require "bifrost/config/from_yaml_file"
