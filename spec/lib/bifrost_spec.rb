@@ -116,4 +116,89 @@ describe Bifrost do
       end
     end
   end
+
+  describe ".connect" do
+    before do
+      if Bifrost.instance_variables.include?(:@mongo)
+        Bifrost.remove_instance_variable(:@mongo)
+      end
+
+      if Bifrost.instance_variables.include?(:@postgres)
+        Bifrost.remove_instance_variable(:@postgres)
+      end
+    end
+
+    context "with :mongo datasource" do
+      it "calls connection with mongo" do
+        expect(Bifrost::Connect::Mongo).to receive(:call).with({})
+
+        Bifrost.connect(:mongo, {})
+      end
+
+      it "cache connection" do
+        allow(Bifrost::Connect::Mongo)
+          .to receive(:call).with({}).and_return(:mongo)
+
+        Bifrost.connect(:mongo, {})
+
+        expect(Bifrost.instance_variables).to eq([:@mongo])
+        expect(Bifrost.instance_variable_get(:@mongo)).to eq(:mongo)
+      end
+    end
+
+    context "with :postgres datasource" do
+      it "calls connection with mongo" do
+        expect(Bifrost::Connect::Postgres).to receive(:call).with({})
+
+        Bifrost.connect(:postgres, {})
+      end
+
+      it "cache connection" do
+        allow(Bifrost::Connect::Postgres)
+          .to receive(:call).with({}).and_return(:postgres)
+
+        Bifrost.connect(:postgres, {})
+
+        expect(Bifrost.instance_variables).to eq([:@postgres])
+        expect(Bifrost.instance_variable_get(:@postgres)).to eq(:postgres)
+      end
+    end
+
+    context "with other datasource" do
+      it "raises error" do
+        expect {
+          Bifrost.connect(:foo, {})
+        }.to raise_error(RuntimeError)
+               .with_message(
+                 "Please choose :postgres or :mongo as first argument"
+               )
+      end
+    end
+  end
+
+  describe ".mongo" do
+    before do
+      allow(Bifrost::Connect::Mongo)
+        .to receive(:call).and_return(:mongo)
+    end
+
+    it "retuns cached connection" do
+      Bifrost.connect(:mongo, {})
+
+      expect(Bifrost.mongo).to eq(:mongo)
+    end
+  end
+
+  describe ".postgres" do
+    before do
+      allow(Bifrost::Connect::Postgres)
+        .to receive(:call).and_return(:postgres)
+    end
+
+    it "retuns cached connection" do
+      Bifrost.connect(:postgres, {})
+
+      expect(Bifrost.postgres).to eq(:postgres)
+    end
+  end
 end
